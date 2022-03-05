@@ -1,0 +1,15 @@
+.header{
+    margin: 25px 0;
+}
+
+.avatar{
+    margin-left: auto;
+    width: 20%;
+}
+
+.sub-header{
+    background-color: black;
+    color: orange;
+    padding: 5px;
+    margin-top: 10px;
+}

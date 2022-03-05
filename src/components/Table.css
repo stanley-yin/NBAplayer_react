@@ -1,0 +1,53 @@
+.search-bar {
+  border: 1px solid #f1f1f1;
+  padding: 15px;
+  margin: 25px 0;
+  align-items: center;
+  height: 100%;
+  background-color: #f1f1f1;
+}
+.select-team {
+  width: 200px;
+  height: 100%;
+  margin-right: 20px;
+  border-radius: 5px;
+  border: 0.5px solid #c2bebe;
+  padding: 0 10px;
+}
+
+#keyword {
+  height: 100%;
+  border-radius: 5px;
+  margin: 0 15px;
+}
+
+.search-btn {
+  height: 100%;
+  border-radius: 5px;
+  background-color: #ececec;
+}
+
+.table {
+  outline: 1px solid black;
+}
+.column-sort {
+  cursor: pointer;
+}
+.column-sort:hover {
+  background-color: rgb(233, 233, 233);
+}
+
+.page-btn {
+  width: 60%;
+  padding-left: 50px;
+}
+.test {
+  align-items: center;
+  display: flex;
+  margin: auto 0;
+}
+
+.chart-btn{
+    background-color: #968e8e;
+    border: 1px solid #c2bebe;
+}
