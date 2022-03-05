@@ -3,7 +3,7 @@
 
 ```
 git clone https://github.com/stanley-yin/NBAplayer_react.git
-cd my-app
+cd NBAplayer_react
 ```
 
 2. Install required dependencies
