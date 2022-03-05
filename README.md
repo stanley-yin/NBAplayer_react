@@ -2,7 +2,7 @@
 1. Clone the repository
 
 ```
-https://github.com/stanley-yin/NBAplayer_react.git
+git clone https://github.com/stanley-yin/NBAplayer_react.git
 cd my-app
 ```
 
@@ -25,11 +25,11 @@ and you should see the website running.
 ## 📦Packages
 - axios
 - bootstrap
-- react": "^17.0.2",
-- react-bootstrap": "^2.1.2",
-- react-dom": "^17.0.2",
-- react-icons": "^4.3.1",
-- react-router-dom": "^5.3.0",
-- react-scripts": "^2.1.3",
-- react-spinners": "^0.11.0",
-- recharts": "^2.1.9",
+- react
+- react-bootstrap
+- react-dom
+- react-icons
+- react-router-dom
+- react-scripts
+- react-spinners
+- recharts
