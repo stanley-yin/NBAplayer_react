@@ -29,7 +29,12 @@
 
 .table {
   outline: 1px solid black;
+  table-layout: fixed;
 }
+.special-width{
+  width: 250px;
+}
+
 .column-sort {
   cursor: pointer;
 }
@@ -50,4 +55,8 @@
 .chart-btn{
     background-color: #968e8e;
     border: 1px solid #c2bebe;
+}
+
+.active{
+  background-color: rgb(229, 182, 182) !important;
 }

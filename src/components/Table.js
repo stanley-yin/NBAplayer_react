@@ -3,6 +3,7 @@ import "./Table.css";
 import axios from "axios";
 import { FcSearch } from "react-icons/fc";
 import { TiArrowUnsorted } from "react-icons/ti";
+import { CgArrowLongDown, CgArrowLongUp } from "react-icons/cg";
 import Pagination from "./Pagination";
 import BeatLoader from "react-spinners/BeatLoader";
 import Chart from "./Chart";
@@ -23,6 +24,7 @@ function Table() {
   const [team, setTeam] = useState("");
   const [keyword, setKeyword] = useState("");
   const [sort, setSort] = useState("");
+  const [sortBy, setSortBy] = useState("DESC");
 
   const [modalShow, setModalShow] = useState(false);
 
@@ -34,15 +36,14 @@ function Table() {
     { json_name: "steals_per_game", interface_name: "Steals" },
     { json_name: "blocks_per_game", interface_name: "Blocks" },
   ];
-  // 載入頁面時獲取資料
+  // === 載入頁面時獲取資料
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, 1400);
     const getData = async () => {
       const r = await axios.get("http://localhost:9999/player-list"); // 拿到promise物件
-      const output = r.data;
-
+      const output = await r.data;
       // 分頁
       setCurrPage(1);
 
@@ -67,7 +68,7 @@ function Table() {
     getData();
   }, []);
 
-  // team & keyword Search
+  // === team & keyword Search
   const handleSearch = async () => {
     setLoading(true);
     const team = document.querySelector("#team").value;
@@ -87,13 +88,29 @@ function Table() {
     }, 500);
   };
 
-  // 排序
+  // === 表格的排序
   const handleSort = async (sortItem) => {
     console.log(sort);
-    setSort(sortItem);
+    let newSortBy;
+
+    // 如果排序的項目不相同，則重新設定排序的項目
+    if (sortItem !== sort) {
+      setSort(sortItem);
+      newSortBy = "DESC";
+      setSortBy(newSortBy);
+    } else {
+      // 升冪 or 降冪 判斷
+      if (sortBy === "DESC") {
+        newSortBy = "ASC";
+        setSortBy(newSortBy);
+      } else {
+        newSortBy = "DESC";
+        setSortBy(newSortBy);
+      }
+    }
 
     const r = await axios.get(
-      `http://localhost:9999/player-list?team=${team}&keyword=${keyword}&sortItem=${sortItem}`
+      `http://localhost:9999/player-list?team=${team}&keyword=${keyword}&sortItem=${sortItem}&sortBy=${newSortBy}`
     );
 
     const output = r.data;
@@ -171,20 +188,35 @@ function Table() {
       <table className="table table-hover">
         <thead>
           <tr>
-            <th>Team</th>
-            <th>Name</th>
-            {column.map((th) => {
+            <th className='special-width'>Team</th>
+            <th className='special-width'>Name</th>
+            {column.map((th, index) => {
               return (
                 <>
                   <th
                     className="column-sort"
-                    onClick={() => {
+                    onClick={(e) => {
                       handleSort(th.json_name);
+
+                      // 表註所選取的排序欄位
+                      const allSortColumn = document.querySelectorAll("th");
+                      for (let i = 0; i < allSortColumn.length; i++) {
+                        allSortColumn[i].classList.remove("active");
+                      }
+                      e.currentTarget.classList.add("active");
                     }}
                   >
                     {th.interface_name}
                     <span>
-                      <TiArrowUnsorted />
+                      {sort === th.json_name ? (
+                        sortBy === "DESC" ? (
+                          <CgArrowLongUp />
+                        ) : (
+                          <CgArrowLongDown />
+                        )
+                      ) : (
+                        ""
+                      )}
                     </span>
                   </th>
                 </>
@@ -211,7 +243,7 @@ function Table() {
                     <td>{el.blocks_per_game}</td>
                     <td>
                       <div className="text-center">
-                        <Link to={`/player-details/${el.sid}`}>
+                        <Link to={`/player-details/${el.sid}`} key={el.sid}>
                           <FcSearch />
                         </Link>
                       </div>
