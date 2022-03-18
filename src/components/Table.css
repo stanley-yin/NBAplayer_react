@@ -37,6 +37,7 @@
 
 .column-sort {
   cursor: pointer;
+  user-select: none;
 }
 .column-sort:hover {
   background-color: rgb(233, 233, 233);
